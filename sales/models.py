@@ -4,6 +4,7 @@ class Sale(models.Model):
     comment = models.TextField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     number_of_kegs = models.PositiveIntegerField(unique=False)
+    price_of_keg = models.FloatField(unique=False)
     beer = models.ForeignKey(
         'beers.Beer',
         related_name='sales',
