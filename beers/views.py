@@ -5,6 +5,7 @@ from rest_framework.exceptions import NotFound
 
 from .models import Beer
 from .serializers.common import BeerSerializer
+from .serializers.populated import PopulatedBeerSerializer
 
 
 class BeerListView(APIView):
@@ -32,8 +33,8 @@ class BeerDetailView(APIView):
 
     def get(self, _request, pk):
         beer = self.get_beer(pk=pk)
-        serialized_pokemon = BeerSerializer(beer)
-        return Response(serialized_pokemon.data, status=status.HTTP_200_OK)
+        serialized_beer = PopulatedBeerSerializer(beer)
+        return Response(serialized_beer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
         beer_to_update = self.get_beer(pk=pk)
