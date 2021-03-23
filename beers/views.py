@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import NotFound
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Beer
 from .serializers.common import BeerSerializer
@@ -9,6 +10,8 @@ from .serializers.populated import PopulatedBeerSerializer
 
 
 class BeerListView(APIView):
+
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
     def get(self, _request):
         beers = Beer.objects.all()
@@ -24,6 +27,8 @@ class BeerListView(APIView):
 
 
 class BeerDetailView(APIView):
+
+    permission_classes = (IsAuthenticatedOrReadOnly, )
 
     def get_beer(self, pk):
         try:
