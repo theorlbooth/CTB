@@ -10,11 +10,11 @@ class Sale(models.Model):
         related_name='sales',
         on_delete=models.PROTECT
     )
-    # user = models.ForeignKey(
-    #     'users.User',
-    #     related_name='sales',
-    #     on_delete=models.PROTECT
-    # )
+    user = models.ForeignKey(
+        'jwt_auth.User',
+        related_name='sales',
+        on_delete=models.PROTECT
+    )
 
     def __str__(self):
         return f'Sale #{self.id} - {self.number_of_kegs} kegs of {self.beer.name}'

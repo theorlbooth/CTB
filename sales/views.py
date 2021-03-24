@@ -5,13 +5,14 @@ from rest_framework.exceptions import NotFound
 
 from .models import Sale
 from .serializers.common import SaleSerializer
+from .serializers.populated import PopulatedSaleSerializer
 
 
 class SaleListView(APIView):
 
     def get(self, _request):
         sales = Sale.objects.all()
-        serialized_sales = SaleSerializer(sales, many=True)
+        serialized_sales = PopulatedSaleSerializer(sales, many=True)
         return Response(serialized_sales.data, status=status.HTTP_200_OK)
 
     def post(self, request):
